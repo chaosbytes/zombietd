@@ -18,7 +18,7 @@ ig.module('plugins.Button').requires('impact.entity').defines(function () {
 		animSheet: null,
 
 		state: 'idle',
-		level: null,
+		
 
 		_oldPressed: false,
 		_startedIn: false,
@@ -27,9 +27,9 @@ ig.module('plugins.Button').requires('impact.entity').defines(function () {
 		init: function (x, y, settings) {
 			this.parent(x, y, settings);
 
-			this.addAnim('idle', 1, [this.level]);
-			this.addAnim('active', 1, [this.level]);
-			this.addAnim('deactive', 1, [this.level + 6]);
+			this.addAnim('idle', 1, 0);
+			this.addAnim('active', 1, 1);
+			this.addAnim('deactive', 1, 2);
 
 			if (this.text.length > 0 && this.font === null) {
 				if (ig.game.buttonFont !== null) this.font = ig.game.buttonFont;

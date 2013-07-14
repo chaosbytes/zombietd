@@ -1,4 +1,4 @@
-ig.module('game.main').requires('impact.game', 'impact.font', 'plugins.impact-splash-loader').defines(function () {
+ig.module('game.main').requires('impact.game', 'impact.font', 'game.menus.mainmenu', 'plugins.impact-splash-loader').defines(function () {
 
 	ZombieTD = ig.Game.extend({
 		init: function () {
@@ -15,9 +15,9 @@ ig.module('game.main').requires('impact.game', 'impact.font', 'plugins.impact-sp
 		}
 	});
 
-
+	
 	// Start the Game with 60fps, a resolution of 320x240, scaled
 	// up by a factor of 2
-	ig.main('#canvas', ZombieTD, 60, 960, 640, 1, ig.ImpactSplashLoader);
+	ig.main('#canvas', MainMenu, 60, 960, 832, 1, ig.ImpactSplashLoader);
 
 });
