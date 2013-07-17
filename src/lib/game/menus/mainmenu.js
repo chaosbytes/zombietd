@@ -1,4 +1,4 @@
-ig.module('game.menus.mainmenu').requires('impact.game', 'impact.font', 'impact.image', 'plugins.Button', 'game.menus.levelselect').defines(function() {
+ig.module('game.menus.mainmenu').requires('impact.game', 'impact.font', 'impact.image', 'plugins.Button', 'game.menus.LevelSelectMenu').defines(function () {
 
 	MainMenu = ig.Game.extend({
 		bg: new ig.Image('media/mainmenu-bg.png'),
@@ -12,37 +12,39 @@ ig.module('game.menus.mainmenu').requires('impact.game', 'impact.font', 'impact.
 			part_one_x: null,
 			part_two_x: null,
 			part_three_x: null,
-			y: null,
+			y: null
 		},
 		start_btn: null,
-		init: function() {
+		init: function () {
 			this.title_width = this.font128.widthForString(this.title_part_one) + this.font64.widthForString(this.title_part_two) + this.font128.widthForString(this.title_part_three);
 			this.title_pos.part_one_x = ig.system.width / 2 - this.title_width / 2;
 			this.title_pos.part_two_x = this.title_pos.part_one_x + this.font128.widthForString(this.title_part_one) + this.font64.letterSpacing;
 			this.title_pos.part_three_x = this.title_pos.part_two_x + this.font64.widthForString(this.title_part_two) + this.font64.letterSpacing;
 			this.title_pos.y = 175;
-			this.start_btn = ig.game.spawnEntity("Button", ig.system.width / 2, ig.system.height / 2, {
-				animSheet: new ig.AnimationSheet('media/start-btn-ss.png', 768, 128),
+			ig.input.bind(ig.KEY.MOUSE1, 'click');
+			this.start_btn = ig.game.spawnEntity("Button", ig.system.width / 2 - 144, ig.system.height / 2.25, {
+				animSheet: new ig.AnimationSheet('media/start-btn-ss.png', 288, 128),
 				size: {
-					x: 256,
+					x: 288,
 					y: 128
 				},
-				pressedUp: function() {
+				pressedUp: function () {
 					console.log("click");
-					ig.system.setGame("LevelSelectMenu");
+					ig.system.setGame(LevelSelectMenu);
 				}
 			});
 		},
-		update: function() {
+		update: function () {
 			// Update all entities and backgroundMaps
 			this.parent();
 			// Add your own, additional update code here
 		},
-		draw: function() {
+		draw: function () {
 			this.bg.draw(0, 0);
 			this.font128.draw(this.title_part_one, this.title_pos.part_one_x, this.title_pos.y);
 			this.font64.draw(this.title_part_two, this.title_pos.part_two_x, this.title_pos.y + (this.font128.height - this.font64.height) - 24);
 			this.font128.draw(this.title_part_three, this.title_pos.part_three_x, this.title_pos.y);
+			this.start_btn.draw();
 		}
 	});
 });

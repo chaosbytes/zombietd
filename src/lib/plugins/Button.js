@@ -27,14 +27,15 @@ ig.module('plugins.Button').requires('impact.entity').defines(function () {
 		init: function (x, y, settings) {
 			this.parent(x, y, settings);
 
-			this.addAnim('idle', 1, 0);
-			this.addAnim('active', 1, 1);
-			this.addAnim('deactive', 1, 2);
+			this.addAnim('idle', 1, [0]);
+			this.addAnim('active', 1, [1]);
+			this.addAnim('deactive', 1, [2]);
 
 			if (this.text.length > 0 && this.font === null) {
 				if (ig.game.buttonFont !== null) this.font = ig.game.buttonFont;
 				else console.error('If you want to display text, you should provide a font for the button.');
 			}
+			this.currentAnim = this.anims.idle;
 		},
 
 		update: function () {
